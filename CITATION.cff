@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it using the metadata below."
+title: "PIP"
+abstract: "A browser extension that enables Picture-in-Picture mode for HTML5 video content."
+version: 1.0.0
+date-released: 2026-10-23
+license: AGPL-3.0-only
+authors:
+  - name: M003aad
+repository-code: "https://github.com/M003aad/PIP.git"
+url: "https://github.com/M003aad/PIP"

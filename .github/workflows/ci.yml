@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Validate manifest.json
+        run: |
+          node -e "const fs=require('fs'); const manifest=JSON.parse(fs.readFileSync('manifest.json','utf8')); if (!manifest || manifest.manifest_version !== 3) { throw new Error('manifest.json is missing or invalid'); } console.log('manifest.json is valid');"
+
+      - name: Verify required extension files
+        run: |
+          node -e "const fs=require('fs'); const required=['background.js','content.js','manifest.json','icons/icon16.png','icons/icon128.png']; for (const file of required) { if (!fs.existsSync(file)) { throw new Error('Missing required file: ' + file); } } console.log('Required extension files are present');"
